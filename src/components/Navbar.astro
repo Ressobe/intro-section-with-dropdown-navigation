@@ -1,0 +1,88 @@
+---
+import FeaturesMenu from '../components/FeaturesMenu.astro';
+import CompanyMenu from '../components/CompanyMenu.astro';
+---
+
+<nav data-menu-type="navbar" class="flex justify-between items-center pt-6 px-4 text-medium-gray">
+  <div class="inline-flex items-center gap-10 ">
+    <img class="w-24" src="logo.svg" alt="logo"/>
+
+    <div class="relative">
+      <button data-menu-button="features" class="inline-flex gap-2 h-fit hover:cursor-pointer">
+        <span class="hover:text-almost-black cursor-pointer">Features</span>
+        <img src="icon-arrow-down.svg" alt="icon arrow down" class="inline-block h-2 self-center" />
+      </button>
+      
+      <FeaturesMenu />
+
+    </div>
+
+  <div class="relative">
+    <button data-menu-button="company" class="inline-flex gap-2 h-fit hover:cursor-pointer">
+      <span class="hover:text-almost-black cursor-pointer">Company</span>
+      <img  src="icon-arrow-down.svg" alt="icon arrow down" class="inline-block h-2 self-center" />
+    </button>
+
+    <CompanyMenu />
+
+  </div>
+
+    <a class="hover:text-almost-black cursor-pointer">Careers</a>
+    <a class="hover:text-almost-black cursor-pointer">About</a>
+    </div>
+    <div class="inline-flex gap-16">
+      <button class="hover:text-almost-black cursor-pointer">Login</button>
+      <button class="py-2 px-6 rounded-xl border-2 border-medium-gray hover:text-almost-black hover:border-almost-black cursor-pointer">Register</button> 
+    </div>
+</nav>
+
+<script>
+  const dataButtons = document.querySelectorAll<HTMLButtonElement>("[data-menu-button]");
+
+  const showMenu = (menu: HTMLElement) => {
+    menu.classList.remove("opacity-0") 
+    menu.classList.remove("pointer-events-none")
+    menu.classList.add("opacity-100");
+  }
+
+  const hideMenu = (menu: HTMLElement) => {
+    menu.classList.remove("opacity-100");
+    menu.classList.add("opacity-0") 
+    menu.classList.add("pointer-events-none")
+  }
+
+  dataButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const menuValue = button.getAttribute("data-menu-button");
+      const menu = document.querySelector<HTMLDivElement>(`[data-menu-content=${menuValue}]`)!;
+
+      const arrowIcon = button.getElementsByTagName("img")[0]!;
+
+      if (menu.classList.contains("opacity-0")) {
+        showMenu(menu);
+        arrowIcon.setAttribute('src', 'icon-arrow-up.svg')
+      }
+      else {
+        hideMenu(menu);
+        arrowIcon.setAttribute('src', 'icon-arrow-down.svg')
+      }
+
+    })
+  })
+
+  document.addEventListener('click', (event) => {
+      const target  = event.target as Node;
+
+      dataButtons.forEach((button) => {
+        const menuValue = button.getAttribute("data-menu-button");
+        const menu = document.querySelector<HTMLDivElement>(`[data-menu-content=${menuValue}]`)!;
+        const arrowIcon = button.getElementsByTagName("img")[0]!;
+
+        if (menu.classList.contains("opacity-100") && !button.contains(target) && !menu.contains(target)) {
+          hideMenu(menu);
+          arrowIcon.setAttribute('src', 'icon-arrow-down.svg')
+        }
+      })
+  })
+  
+</script>

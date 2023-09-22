@@ -1,0 +1,106 @@
+<nav data-menu-type="sidebar" class=" justify-between items-center pt-6 px-4 text-medium-gray">
+    <img class="w-24" src="logo.svg" alt="logo"/>
+
+    <button id="open-menu" class="cursor-pointer hover:opacity-80 active:opacity-60">
+      <img class="cursor-pointer" src="icon-menu.svg" alt="menu-bar" />
+    </button>
+    <div id="menu" class="fixed z-50 hidden  flex-col gap-5 top-0 right-0 bg-almost-white text-medium-gray  drop-shadow-2xl h-screen  w-96 px-6 pt-4">
+        <button id="close-menu" class="cursor-pointer self-end" >
+          <img src="icon-close-menu.svg" class="w-8 hover:opacity-80 active:opacity-60" alt="close-menu" />
+        </button>
+          <button data-menu-mobile-button="features" class="inline-flex gap-2 h-fit hover:cursor-pointer">
+            <span class="hover:text-almost-black cursor-pointer">Features</span>
+            <img src="icon-arrow-down.svg" alt="icon arrow down" class="inline-block h-2 self-center" />
+          </button>
+
+          <div data-menu-moblie-content="features" class="ml-6 hidden pointer-events-none flex-col gap-2 items-start">
+            <span class="inline-flex gap-2 items-center">
+              <img src="icon-todo.svg" class="w-4 h-4"  />
+              Todo List
+            </span> 
+
+            <span class="inline-flex gap-2 items-center ">
+              <img src="icon-calendar.svg" class="w-4 h-4"  />
+              Calendar 
+            </span> 
+
+            <span class="inline-flex gap-2 items-center ">
+              <img src="icon-reminders.svg" class="w-4 h-4"  />
+              Reminders 
+            </span> 
+
+            <span class="inline-flex gap-2 items-center ">
+              <img src="icon-planning.svg" class="w-4 h-4"  />
+              Planning 
+            </span> 
+          </div>
+
+          <button data-menu-mobile-button="company" class="inline-flex gap-2 h-fit hover:cursor-pointer">
+            <span class="hover:text-almost-black cursor-pointer">Company</span>
+            <img  src="icon-arrow-down.svg" alt="icon arrow down" class="inline-block h-2 self-center" />
+          </button>
+
+          <div data-menu-moblie-content="company" class="ml-6 hidden pointer-events-none flex-col gap-2 items-start">
+            <span>History</span>
+            <span>Our Team</span>
+            <span>Blog</span>
+          </div>
+
+          <a class="hover:text-almost-black cursor-pointer">Careers</a>
+          <a class="hover:text-almost-black cursor-pointer">About</a>
+
+          <button class="hover:text-almost-black cursor-pointer">Login</button>
+          <button class=" w-3/4 self-center py-2 px-6 rounded-xl border-2 border-medium-gray hover:text-almost-black hover:border-almost-black cursor-pointer">Register</button> 
+    </div> 
+</nav>
+
+<script>
+  const menu = document.querySelector("#menu")!;
+  const dataButtons = document.querySelectorAll<HTMLButtonElement>("[data-menu-mobile-button]");
+  const openMenuButton = document.querySelector<HTMLButtonElement>("#open-menu")!;
+  const closeMenuButton = document.querySelector<HTMLButtonElement>("#close-menu")!;
+
+  openMenuButton.addEventListener('click', () => {
+    menu.classList.remove("hidden");
+    menu.classList.add("flex");
+  })
+
+  closeMenuButton.addEventListener('click', () => {
+    menu.classList.remove("flex");
+    menu.classList.add("hidden");
+  })
+
+  const hideMenu = (menu: HTMLElement) => {
+        menu.classList.remove("hidden") 
+        menu.classList.remove("pointer-events-none")
+        menu.classList.add("flex");
+  }
+
+  const showMenu = (menu: HTMLElement) => {
+    menu.classList.remove("flex");
+    menu.classList.add("hidden") 
+    menu.classList.add("pointer-events-none")
+  }
+
+
+  dataButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const menuValue = button.getAttribute("data-menu-mobile-button");
+      const menu = document.querySelector<HTMLDivElement>(`[data-menu-moblie-content=${menuValue}]`)!;
+
+      console.log(menuValue);
+
+      const arrowIcon = button.getElementsByTagName("img")[0]!;
+
+      if (menu.classList.contains("hidden")) {
+        hideMenu(menu);
+        arrowIcon.setAttribute('src', 'icon-arrow-up.svg')
+      }
+      else {
+        showMenu(menu);
+        arrowIcon.setAttribute('src', 'icon-arrow-down.svg')
+      }
+
+    })
+  })
+</script>

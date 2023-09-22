@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Sidebar from '../components/Sidebar.astro';
+---
+
+<Layout>
+  <Navbar />
+  <Sidebar />
+
+  <main class="h-screen my-10 flex flex-col  xl:flex-row  xl:justify-center items-center  px-20 gap-20 ">
+
+    <div id="left-side" class="h-fit flex flex-col order-2 xl:order-1 w-auto xl:w-1/3 justify-between items-center xl:items-start content-center gap-12 ">
+      <div>
+        <h1 class="text-almost-black font-bold text-7xl">Make</h1> 
+        <h1 class="text-almost-black font-bold text-7xl">remote work</h1>
+      </div>
+
+
+      <p class="text-center w-2/3 xl:text-left xl:w-auto text-medium-gray">Get your team in sync, no matter your location. Streamline processes, 
+      create team rituals, and watch productivity soar.</p>
+
+      <button class="w-fit self-center xl:self-start py-4 px-8 rounded-xl border border-almost-black font-bold bg-almost-black text-almost-white hover:bg-almost-white hover:border-medium-gray hover:text-almost-black">Learn more</button>
+
+      <div class="flex items-center gap-6 justify-between py-5 ">
+        <img src="client-databiz.svg" alt="client databiz" />
+        <img src="client-audiophile.svg" alt="client audiophile" />
+        <img src="client-meet.svg" alt="client meet" />
+        <img src="client-maker.svg" alt="client maker" />
+      </div>
+    </div>
+
+    <img id="image-hero" src="image-hero-desktop.png" class="order-1 xl:order-2 h-[34rem]" />
+	</main>
+</Layout>
+
+<script>
+  const imageHero = document.querySelector("#image-hero")!;
+  const navElements = document.querySelectorAll<HTMLDivElement>("[data-menu-type]")!;
+
+  const hideElement = (element: HTMLElement) => {
+    element.classList.remove("flex");
+    element.classList.add("hidden")
+  }
+
+  const showElement = (element: HTMLElement) => {
+    element.classList.remove("hidden");
+    element.classList.add("flex")
+  }
+
+  const setDesign = () => {
+    const windowWidth = window.innerWidth;
+    const [navbar, sidebar] = navElements;
+
+    if (windowWidth > 1280) {
+      imageHero.setAttribute('src', 'image-hero-desktop.png');
+      showElement(navbar);
+      hideElement(sidebar);
+    }
+    else {
+      imageHero.setAttribute('src', 'image-hero-mobile.png');
+      showElement(sidebar);
+      hideElement(navbar);
+    }
+  }
+
+  setDesign();
+
+  window.addEventListener('resize', setDesign);
+</script>
+
