@@ -59,13 +59,17 @@
   const dataButtons = document.querySelectorAll<HTMLButtonElement>("[data-menu-mobile-button]");
   const openMenuButton = document.querySelector<HTMLButtonElement>("#open-menu")!;
   const closeMenuButton = document.querySelector<HTMLButtonElement>("#close-menu")!;
+  const main = document.body.getElementsByTagName("main")[0]!;
+
 
   openMenuButton.addEventListener('click', () => {
+    main.classList.add("opacity-40")
     menu.classList.remove("hidden");
     menu.classList.add("flex");
   })
 
   closeMenuButton.addEventListener('click', () => {
+    main.classList.remove("opacity-40")
     menu.classList.remove("flex");
     menu.classList.add("hidden");
   })
@@ -88,7 +92,6 @@
       const menuValue = button.getAttribute("data-menu-mobile-button");
       const menu = document.querySelector<HTMLDivElement>(`[data-menu-moblie-content=${menuValue}]`)!;
 
-      console.log(menuValue);
 
       const arrowIcon = button.getElementsByTagName("img")[0]!;
 
