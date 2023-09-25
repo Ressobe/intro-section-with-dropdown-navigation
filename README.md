@@ -28,7 +28,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://ressobe.github.io/intro-section-with-dropdown-navigation/)
+- Live Site URL: https://ressobe.github.io/intro-section-with-dropdown-navigation/
 
 ## My process
 
@@ -44,4 +44,4 @@ Users should be able to:
 
 ### What I learned
 
-Easy project to remember vanilla javascript.
+Easy project to remember HTML, CSS and Javascript.
