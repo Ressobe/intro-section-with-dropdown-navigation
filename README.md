@@ -45,3 +45,5 @@ Users should be able to:
 ### What I learned
 
 Easy project to remember HTML, CSS and Javascript.
+However, I had problems getting the tailwind css to work after build process.
+I had to build tailwind classes into one file (build.css) and included in public folder.
